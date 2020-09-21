@@ -15,10 +15,16 @@ const App = () => {
   const [userText, setUserText] = useState('');
   const [gameState, setGameState] = useState(INITIAL_GAME_STATE);
 
-  const updateUserText = e => {
-    setUserText(e.target.value)
-    console.log('current userText', userText)
-  }
+  const updateUserText = event => {
+    setUserText(event.target.value);
+
+    if (event.target.value === snippet) {
+      setGameState({
+        ...gameState,
+        victory: true,
+        endTime: new Date().getTime() - gameState.startTime
+      });
+    }  }
 
   const chooseSnippet = snippetIndex => () => {
     console.log('setSnippet', snippetIndex);
@@ -32,6 +38,7 @@ const App = () => {
       <hr/>
       <h3>Snippet</h3>
       {snippet}
+      <h4>{gameState.victory ? `Done! 🎉 Time: ${gameState.endTime}ms` : null}</h4>
       <input value={userText} onChange={updateUserText}/>
       <hr/>
       {SNIPPETS.map((SNIPPET, index) => (
