@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 
 const App = () => {
@@ -15,6 +15,11 @@ const App = () => {
   const [userText, setUserText] = useState('');
   const [gameState, setGameState] = useState(INITIAL_GAME_STATE);
 
+  // HELPER METHODS
+  useEffect(() => {
+    if (gameState.victory) document.title = 'Victory!';
+  });
+  
   const updateUserText = event => {
     setUserText(event.target.value);
 
@@ -32,6 +37,7 @@ const App = () => {
     setGameState({ ...gameState, startTime: new Date().getTime() });
   };
 
+  // RENDER
   return (
     <div>
       <h2>Type Race</h2>
