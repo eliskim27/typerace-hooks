@@ -9,7 +9,6 @@ const App = () => {
   ];
   const [snippet, setSnippet] = useState('');
   const [userText, setUserText] = useState('');
-  const [userText, setUserText] = useState('');
 
   const updateUserText = e => {
     setUserText(e.target.value)
@@ -24,7 +23,16 @@ const App = () => {
   return (
     <div>
       <h2>Type Race</h2>
+      <hr/>
+      <h3>Snippet</h3>
+      {snippet}
       <input value={userText} onChange={updateUserText}/>
+      <hr/>
+      {SNIPPETS.map((SNIPPET, index) => (
+        <button onClick={chooseSnippet(index)} key={index}>
+          {SNIPPET.substring(0,10)}...
+        </button>
+      ))}
     </div>
   )
 }
